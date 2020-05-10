@@ -1,0 +1,28 @@
+.profile__add{
+    color: #FFFFFF;
+    background-color: #000000;
+    border: 2px solid #FFFFFF;
+    outline: none;
+}
+.profile__add:hover{
+    opacity: 0.6;
+}
+@media screen and (min-width: 320px){
+    .profile__add{
+        margin-top: 36px;
+        width: 100%;
+        height: 50px;
+    }
+}
+@media screen and (min-width: 650px){
+    .profile__add{
+        width: 582px;
+        margin-left: -147px;
+    }
+}
+@media screen and (min-width: 980px){
+    .profile__add{
+        width: 150px;
+        margin-left: auto;
+    }
+}

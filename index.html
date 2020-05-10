@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mesto</title>
+    <link rel='stylesheet' href='./pages/index.css'>
+    <meta name='description' content='Интерактивная страница, в которую можно добавлять фотографии, удалять их и ставить лайки.'>
+    <meta name='keywords' content='Фотографии'>
+    <meta name='author' content='Александр Давыденко'>
+  </head>
+  <body>
+    <div class='page'>
+      <header class='header'>
+        <img class='header__logo' alt='Место' src='./images/logo.png'>
+      </header>
+
+      <section class='popup' id='popup'>
+        <div class='popup__container'>
+          <button class='popup__close'></button>
+          <div class='popup__form'>
+            <h3 class='popup__title'>Редактировать профиль</h3>
+            <input class='popup__name' type='text'>
+            <input class='popup__activity' type='text'>
+            <button class='popup__save'>Сохранить</button>
+          </div>
+        </div>
+      </section>
+
+      <section class='profile'>
+        <img class='profile__image' alt='фото профиля' src='./images/Jak-Iv-Kusto.jpg'>
+        <div class='profile__info'>
+          <h1 class='profile__name'>Жак-Ив Кусто</h1>
+          <p class='profile__activity'>Исследователь океана</p>
+          <button class='profile__edit'></button>
+        </div>
+        <button class='profile__add'>+</button>
+      </section>
+
+      <section class='elements'>
+        <div class='element'>
+          <img class='element__image' alt='Амстердам' src='./images/amsterdam.jpg'>
+          <p class='element__title'>Амстердам</p>
+          <button class='element__like'></button>
+        </div>
+        <div class='element'>
+          <img class='element__image' alt='Гаага' src='./images/gaaga.jpg'>
+          <p class='element__title'>Гаага</p>
+          <button class='element__like'></button>
+        </div>
+        <div class='element'>
+          <img class='element__image' alt='Хельсинки' src='./images/helsinki.jpg'>
+          <p class='element__title'>Хельсинки</p>
+          <button class='element__like'></button>
+        </div>
+        <div class='element'>
+          <img class='element__image' alt='Монсеррат' src='./images/monserat.jpg'>
+          <p class='element__title'>Монсеррат</p>
+          <button class='element__like'></button>
+        </div>
+        <div class='element'>
+          <img class='element__image' alt='Таллин' src='./images/tallin.jpg'>
+          <p class='element__title'>Таллин</p>
+          <button class='element__like'></button>
+        </div>
+        <div class='element'>
+          <img class='element__image' alt='Утрехт' src='./images/urteh.jpg'>
+          <p class='element__title'>Утрехт</p>
+          <button class='element__like'></button>
+        </div>
+      </section>
+
+      <footer class='footer'>
+        <p class='footer__text'>&#169; 2020 Mesto Russia</p>
+      </footer>
+    </div>
+    <script src='./script.js'></script>
+  </body>
+</html>
