@@ -1,0 +1,7 @@
+.page{
+    background-color: #000000;
+    font-family: 'Inter', sans-serif;
+}
+@supports (font-variation-settings: normal) {
+    .page { font-family: 'Inter var', sans-serif; }
+}

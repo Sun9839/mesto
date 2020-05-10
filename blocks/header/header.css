@@ -1,0 +1,23 @@
+@import url('./__logo/header__logo.css');
+.header{
+    border-bottom: 1px solid #545454;
+    margin-right: auto;
+    margin-left: auto;
+}
+@media screen and (min-width: 320px){
+    .header{
+        width: 100%;
+        padding-top: 28px;
+    }
+}
+@media screen and (min-width: 650px){
+    .header{
+        width: 582px;
+        padding-top: 45px;
+    }
+}
+@media screen and (min-width: 980px){
+    .header{
+        width: 882px;
+    }
+}
