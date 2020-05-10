@@ -1,0 +1,25 @@
+@import url('./__text/footer__text.css');
+.footer{
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}
+@media screen and (min-width: 320px){
+    .footer{
+        width: 282px;
+        margin-top: 48px;
+        padding-bottom: 36px;
+    }
+}
+@media screen and (min-width: 650px){
+    .footer{
+        width: 582px;
+    }
+}
+@media screen and (min-width: 980px){
+    .footer{
+        width: 882px;
+        margin-top: 66px;
+        padding-bottom: 60px;
+    }
+}
