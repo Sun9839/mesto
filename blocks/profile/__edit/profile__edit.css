@@ -5,6 +5,7 @@
     background-repeat: no-repeat;
     background-color: #000000;
     outline: none;
+    -webkit-appearance: none;
 }
 .profile__edit:hover{
     opacity: 0.6;

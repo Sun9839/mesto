@@ -5,6 +5,7 @@
     border: none;
     text-align: center;
     outline: none;
+    -webkit-appearance: none;
 }
 .popup__save:hover{
     opacity: 0.8;
