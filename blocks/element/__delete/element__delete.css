@@ -1,0 +1,19 @@
+.element__delete{
+    background-image: url('../../../images/rubish-container.svg');
+    background-position: center;
+    background-size: 18px 19px;
+    background-repeat: no-repeat;
+    border: 0;
+    background-color: rgba(0,0,0,0);
+    width: 18px;
+    height: 19px;
+    position: absolute;
+    top: 18px;
+    right: 15px;
+    z-index: 3;
+    outline: none;
+    -webkit-appearance: none;
+}
+.element__delete:hover{
+    opacity: 0.6;
+}
