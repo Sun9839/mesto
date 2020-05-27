@@ -7,43 +7,41 @@ const closeButton = popup.querySelector('.popup__close');
 const inputName = popup.querySelector('.popup__name');
 const inputActivity = popup.querySelector('.popup__activity');
 const saveButton = popup.querySelector('.popup__save');
+const cardsZone = document.querySelector('.elements');
+const card = cardsZone.querySelector('#element').content;
 const popupCard = document.querySelector('#popup-card');
-const closeButtonCard = popupCard.querySelector('.popup__close');
-const inputNameCard = popupCard.querySelector('.popup__name');
-const inputSourceCard = popupCard.querySelector('.popup__activity');
-const saveButtonCard = popupCard.querySelector('.popup__save');
-const elements = document.querySelector('.elements');
-const element = elements.querySelector('#element').content;
-const cardOne = element.cloneNode(true);
-const cardTwo = element.cloneNode(true);
-const cardThree = element.cloneNode(true);
-const cardFour = element.cloneNode(true);
-const cardFive = element.cloneNode(true);
-const cardSix = element.cloneNode(true);
+const popupCardCloseButton = popupCard.querySelector('.popup__close');
+const popupCardInputName = popupCard.querySelector('.popup__name');
+const popupCardInputLink = popupCard.querySelector('.popup__activity');
+const popupCardSaveButton = popupCard.querySelector('.popup__save');
+const imagePopup = document.querySelector('.image-popup');
+const imagePopupCloseButton = document.querySelector('.image-popup__close');
+let likeButtons = document.querySelectorAll('.element__like');
+let deleteButtons = document.querySelectorAll('.element__delete');
 const initialCards = [
     {
-        name: 'Архыз',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+        name: 'Татуин',
+        link: 'https://s14.stc.all.kpcdn.net/share/i/12/10018874/inx960x640.jpg'
     },
     {
-        name: 'Челябинская область',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+        name: 'Набу',
+        link: 'https://img.gazeta.ru/files3/293/7971293/Nabu_-pic4_zoom-1500x1500-50986.jpg'
     },
     {
-        name: 'Иваново',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+        name: 'Корусант',
+        link: 'https://starwars.ru/media/cache/36/eb/36ebc69855277b638b9100965879a2f1.png'
     },
     {
-        name: 'Камчатка',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+        name: 'Явин 4',
+        link: 'https://upload.wikimedia.org/wikipedia/commons/f/f6/Star_Wars_in_Guatemala.jpg'
     },
     {
-        name: 'Холмогорский район',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+        name: 'Дагоба',
+        link: 'https://retina.news.mail.ru/pic/ec/d2/image706133_cf8032a597cbe3a2402d2a8d5c992ae8.jpg'
     },
     {
-        name: 'Байкал',
-        link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+        name: 'Камино',
+        link: 'https://vignette.wikia.nocookie.net/starwarsrussia/images/1/15/TipocaCity.jpg/revision/latest?cb=20180320001559&path-prefix=ru'
     }
 ];
 function popupClose(){
@@ -61,53 +59,71 @@ function popupSave(){
 }
 function popupCardClose(){
     popupCard.classList.remove('popup__opened');
+    popupCardInputName.value = '';
+    popupCardInputLink.value = '';
 }
 function popupCardOpen(){
     popupCard.classList.add('popup__opened');
-    inputNameCard.value = '';
-    inputSourceCard.value = '';
 }
-function popupCardAdd(){
-    newCard = element.cloneNode(true);
-    newCard.querySelector('.element__image').src = inputSourceCard.value;
-    newCard.querySelector('.element__title').textContent = inputNameCard.value;
-    elements.prepend(newCard);
+function cardAdd(){
+    const newCard = card.cloneNode(true);
+    const cardName = newCard.querySelector('.element__title');
+    const cardImage = newCard.querySelector('.element__image');
+    cardImage.src = popupCardInputLink.value;
+    cardName.textContent = popupCardInputName.value;
+    cardsZone.prepend(newCard);
     popupCardClose();
+    const likeButton = document.querySelector('.element__like');
+    likeButton.addEventListener('click',function(){
+        likeButton.classList.toggle('element__like_clicked')
+    })
+    const deleteButton = document.querySelector('.element__delete');
+    deleteButton.addEventListener('click',function(){
+        deleteButton.parentElement.remove();
+    })
+    cardImage.addEventListener('click',function(){
+        imagePopup.classList.add('image-popup__opened');
+        imagePopup.querySelector('.image-popup__image').src = cardImage.src;
+        imagePopup.querySelector('.image-popup__text').textContent = cardName.textContent;
+    })
+}
+
+function imagePopupClose(){
+    imagePopup.classList.remove('image-popup__opened');
 }
 editButton.addEventListener('click',popupOpen);
 closeButton.addEventListener('click',popupClose);
 saveButton.addEventListener('click',popupSave);
 popup.addEventListener('submit',popupSave);
-document.addEventListener('DOMContentLoaded',function(){
-    cardOne.querySelector('.element__image').src = initialCards[0].link;
-    cardOne.querySelector('.element__title').textContent = initialCards[0].name;
-    elements.append(cardOne);
-})
-document.addEventListener('DOMContentLoaded',function(){
-    cardTwo.querySelector('.element__image').src = initialCards[1].link;
-    cardTwo.querySelector('.element__title').textContent = initialCards[1].name;
-    elements.append(cardTwo);
-})
-document.addEventListener('DOMContentLoaded',function(){
-    cardThree.querySelector('.element__image').src = initialCards[2].link;
-    cardThree.querySelector('.element__title').textContent = initialCards[2].name;
-    elements.append(cardThree);
-})
-document.addEventListener('DOMContentLoaded',function(){
-    cardFour.querySelector('.element__image').src = initialCards[3].link;
-    cardFour.querySelector('.element__title').textContent = initialCards[3].name;
-    elements.append(cardFour);
-})
-document.addEventListener('DOMContentLoaded',function(){
-    cardFive.querySelector('.element__image').src = initialCards[4].link;
-    cardFive.querySelector('.element__title').textContent = initialCards[4].name;
-    elements.append(cardFive);
-})
-document.addEventListener('DOMContentLoaded',function(){
-    cardSix.querySelector('.element__image').src = initialCards[5].link;
-    cardSix.querySelector('.element__title').textContent = initialCards[5].name;
-    elements.append(cardSix);
-})
+popupCardCloseButton.addEventListener('click',popupCardClose);
 addButton.addEventListener('click',popupCardOpen);
-closeButtonCard.addEventListener('click',popupCardClose);
-saveButtonCard.addEventListener('click',popupCardAdd);
+popupCardSaveButton.addEventListener('click',cardAdd);
+popupCardSaveButton.addEventListener('submit',cardAdd);
+document.addEventListener('DOMContentLoaded',function(){
+    likeButtons = document.querySelectorAll('.element__like');
+    likeButtons.forEach(function(item){
+        item.addEventListener('click',function(){
+            item.classList.toggle('element__like_clicked');
+        })
+    })
+    deleteButtons = document.querySelectorAll('.element__delete');
+    deleteButtons.forEach(function(item){
+        item.addEventListener('click',function(){
+            item.parentElement.remove();
+        })
+    })
+});
+imagePopupCloseButton.addEventListener('click',imagePopupClose);
+initialCards.forEach(function(item){
+    const newCard = card.cloneNode(true);
+    const cardName = newCard.querySelector('.element__title');
+    const cardImage = newCard.querySelector('.element__image');
+    cardImage.src = item.link;
+    cardName.textContent = item.name;
+    cardsZone.append(newCard);
+    cardImage.addEventListener('click',function(){
+        imagePopup.classList.add('image-popup__opened');
+        imagePopup.querySelector('.image-popup__image').src = cardImage.src;
+        imagePopup.querySelector('.image-popup__text').textContent = cardName.textContent;
+    });
+});
