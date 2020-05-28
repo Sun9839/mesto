@@ -4,7 +4,10 @@
 @import url('./__text/image-popup__text.css');
 @import url('./__opened/image-popup__opened.css');
 .image-popup{
-    display: none;
+    display: flex;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .7s linear,vivibility .5s linear;
     flex-direction: column;
     justify-content: center;
     align-items: center;
