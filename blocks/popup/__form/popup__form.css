@@ -1,3 +1,4 @@
+@import url('./_size/popup__form_size_big.css');
 .popup__form{
     display: flex;
     flex-direction: column;

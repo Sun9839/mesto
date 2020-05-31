@@ -1,8 +1,8 @@
-@import url('./__image/element__image.css');
-@import url('./__delete/element__delete.css');
-@import url('./__title/element__title.css');
-@import url('./__like/element__like.css');
-.element{
+@import url('./__image/place-card__image.css');
+@import url('./__delete/place-card__delete.css');
+@import url('./__title/place-card__title.css');
+@import url('./__like/place-card__like.css');
+.place-card{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

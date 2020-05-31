@@ -15,10 +15,10 @@
         <img class='header__logo' alt='Место' src='./images/logo.png'>
       </header>
 
-      <section class='popup' id='popup'>
+      <section class='popup' id='profile-popup'>
         <div class='popup__container'>
           <button class='popup__close' type='button'></button>
-          <div class='popup__form'>
+          <div class='popup__form popup__form_size_big'>
             <h3 class='popup__title'>Редактировать профиль</h3>
             <input class='popup__name' type='text'>
             <input class='popup__activity' type='text'>
@@ -29,42 +29,34 @@
 
       <section class='profile'>
         <img class='profile__image' alt='фото профиля' src='./images/Jak-Iv-Kusto.jpg'>
-        <div class='profile__info'>
+        <form class='profile__info'>
           <h1 class='profile__name'>Жак-Ив Кусто</h1>
           <p class='profile__activity'>Исследователь океана</p>
           <button class='profile__edit' type='button'></button>
-        </div>
-        <button class='profile__add' type='button'></button>
+        </form>
+        <button class='profile__add'></button>
       </section>
 
-      <section class='popup' id='popup-card'>
+      <section class='popup' id='card-popup'>
         <div class='popup__container'>
           <button class='popup__close' type='button'></button>
-          <div class='popup__form'>
+          <form class='popup__form'>
             <h3 class='popup__title'>Новое место</h3>
             <input class='popup__name' type='text' placeholder='Название'>
             <input class='popup__activity' type='text' placeholder='Ссылка на картинку'>
-            <button class='popup__save' type='button'>Сохранить</button>
-          </div>
+            <button class='popup__save'>Сохранить</button>
+          </form>
         </div>
       </section>
 
-      <section class='elements'>
-        <template id='element'>
-          <div class='element'>
-            <img class='element__image' alt='фото' src=''>
-            <button class='element__delete' type='button'></button>
-            <p class='element__title'></p>
-            <button class='element__like' type='button'></button>
-          </div>
-        </template>
+      <section class='places__list'>
       </section>
 
-      <section class='image-popup'>
-        <div class='image-popup__container'>
-          <button class='image-popup__close' type='button'></button>
-          <img class='image-popup__image' alt='фото' src=''>
-          <p class='image-popup__text'></p>
+      <section class='popup' id='image-popup'>
+        <div class='popup__container'>
+          <button class='popup__close' type='button'></button>
+          <img class='popup__image' alt='фото' src=''>
+          <p class='popup__text'></p>
         </div>
       </section>
 
@@ -72,6 +64,14 @@
         <p class='footer__text'>&#169; 2020 Mesto Russia</p>
       </footer>
     </div>
+    <template id='place-card-template'>
+      <div class='place-card'>
+        <img class='place-card__image' alt='фото' src=''>
+        <button class='place-card__delete' type='button'></button>
+        <p class='place-card__title'></p>
+        <button class='place-card__like' type='button'></button>
+      </div>
+    </template>
     <script src='./scripts/script.js'></script>
   </body>
 </html>
