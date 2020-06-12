@@ -46,9 +46,14 @@ function openProfilePopup(){
     inputName.value = name.textContent;
     inputActivity.value = activity.textContent;
     togglePopup(profilePopup);
+    toggleButtonState(Array.from(profileForm.querySelectorAll('input')),saveButton);
+    Array.from(profileForm.querySelectorAll('input')).forEach((item) => {
+        hideInputError(profileForm,item);
+    })
 }
 function togglePopup(popup){
     popup.classList.toggle('popup__opened');
+    togglePopupEventListener(popup);
 }
 function saveProfile(evt){
     evt.preventDefault();
@@ -83,6 +88,25 @@ function handleImageClick(evt){
     imagePopup.querySelector('.popup__text').textContent = evt.target.alt;
     togglePopup(imagePopup);
 }
+function togglePopupEventListener(popup){
+    if(popup.classList.contains('popup__opened')){
+        popup.addEventListener('click',clickOverlay);
+        document.addEventListener('keydown',clickEsc);
+    }else{
+        popup.removeEventListener('click',clickOverlay);
+        document.removeEventListener('keydown',clickEsc);
+    }
+}
+function clickOverlay(evt){
+    if(evt.target.classList.contains('popup')){
+        togglePopup(document.querySelector('.popup__opened'));
+    }
+}
+function clickEsc(evt){
+    if(evt.keyCode === 27){
+        togglePopup(document.querySelector('.popup__opened'));
+    }
+}
 editButton.addEventListener('click',function(evt){
     openProfilePopup();
 });
@@ -92,14 +116,23 @@ profileCloseButton.addEventListener('click',function(){
 profilePopup.addEventListener('submit',saveProfile);
 popupCardCloseButton.addEventListener('click',function(){
     togglePopup(popupCard);
+    popupCardInputLink.value = '';
+    popupCardInputName.value = '';
+
 });
 addButton.addEventListener('click',function(){
     togglePopup(popupCard);
+    toggleButtonState(Array.from(placesForm.querySelectorAll('input')),saveButton);
+    Array.from(placesForm.querySelectorAll('input')).forEach((item) => {
+        hideInputError(placesForm,item);
+    })
 });
 popupCard.addEventListener('submit',function(evt){
-    const cardElement =createCard(popupCardInputName.value,popupCardInputLink.value);
+    const cardElement = createCard(popupCardInputName.value,popupCardInputLink.value);
     cardsZone.prepend(cardElement);
     togglePopup(popupCard);
+    popupCardInputName.value = '';
+    popupCardInputLink.value = '';
     evt.preventDefault();
 })
 imagePopupCloseButton.addEventListener('click', () =>  togglePopup(imagePopup));

@@ -1,0 +1,22 @@
+@import url('./_active/popup__input-error_active.css');
+.popup__input-error{
+    margin: 0;
+    color: #FF0000;
+    display: inline;
+    font-size: 12px;
+    margin-top: 5px;
+    line-height: 15px;
+    margin-bottom: -12px;
+    position: relative;
+    opacity: 0;
+}
+@media screen and (min-width: 320px){
+    .popup__input-error{
+        width: 200px;
+    }
+}
+@media screen and (min-width: 650px){
+    .popup__input-error{
+        width: 358px;
+    }
+}
