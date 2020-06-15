@@ -9,7 +9,6 @@
     .popup__activity{
         font-size: 12px;
         line-height: 15px;
-        margin-top: 8px;
         padding: 12px 0;
         width: 200px;
     }
@@ -18,7 +17,6 @@
     .popup__activity{
         font-size: 14px;
         line-height: 17px;
-        margin-top: 15px;
         padding: 14px 0;
         width: 358px;
     }

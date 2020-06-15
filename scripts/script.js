@@ -3,17 +3,17 @@ const addButton = document.querySelector('.profile__add');
 const name = document.querySelector('.profile__name');
 const activity = document.querySelector('.profile__activity');
 const profilePopup = document.querySelector('#profile-popup');
+const profileForm = profilePopup.querySelector('.popup__form');
 const profileCloseButton = profilePopup.querySelector('.popup__close');
 const inputName = profilePopup.querySelector('.popup__name');
 const inputActivity = profilePopup.querySelector('.popup__activity');
-const saveButton = profilePopup.querySelector('.popup__save');
 const cardsZone = document.querySelector('.places__list');
 const card = document.querySelector('#place-card-template').content;
 const popupCard = document.querySelector('#card-popup');
+const popupCardForm = popupCard.querySelector('.popup__form');
 const popupCardCloseButton = popupCard.querySelector('.popup__close');
 const popupCardInputName = popupCard.querySelector('.popup__name');
 const popupCardInputLink = popupCard.querySelector('.popup__activity');
-const popupCardSaveButton = popupCard.querySelector('.popup__save');
 const imagePopup = document.querySelector('#image-popup');
 const imagePopupCloseButton = imagePopup.querySelector('.popup__close');
 const initialCards = [
@@ -42,18 +42,52 @@ const initialCards = [
         link: 'https://vignette.wikia.nocookie.net/starwarsrussia/images/1/15/TipocaCity.jpg/revision/latest?cb=20180320001559&path-prefix=ru'
     }
 ];
+function togglePopup(popup){
+    popup.classList.toggle('popup__opened');
+    togglePopupEventListener(popup);
+    cleanErrors(popup);
+}
+function clickOverlay(evt){
+    if(evt.target.classList.contains('popup')){
+        togglePopup(document.querySelector('.popup__opened'));
+    }
+}
+function clickEsc(evt){
+    if(evt.keyCode === 27){
+        togglePopup(document.querySelector('.popup__opened'));
+    }
+}
+function togglePopupEventListener(popup){
+    if(popup.classList.contains('popup__opened')){
+        popup.addEventListener('click',clickOverlay);
+        document.addEventListener('keydown',clickEsc);
+    }else{
+        popup.removeEventListener('click',clickOverlay);
+        document.removeEventListener('keydown',clickEsc);
+    }
+}
+function handleLike(evt){
+    evt.target.classList.toggle('place-card__like_clicked');
+}
+function handleDelete(evt){
+    const deleteCard = evt.target.closest('.place-card');
+    deleteCard.remove();
+}
+function handleImageClick(evt){
+    imagePopup.querySelector('.popup__image').src = evt.target.src;
+    imagePopup.querySelector('.popup__text').textContent = evt.target.alt;
+    togglePopup(imagePopup);
+}
+function setCardEventListeners(item){
+    item.querySelector('.place-card__like').addEventListener('click', handleLike);
+    item.querySelector('.place-card__delete').addEventListener('click', handleDelete);
+    item.querySelector('.place-card__image').addEventListener('click', handleImageClick);
+}
 function openProfilePopup(){
     inputName.value = name.textContent;
     inputActivity.value = activity.textContent;
     togglePopup(profilePopup);
-    toggleButtonState(Array.from(profileForm.querySelectorAll('input')),saveButton);
-    Array.from(profileForm.querySelectorAll('input')).forEach((item) => {
-        hideInputError(profileForm,item);
-    })
-}
-function togglePopup(popup){
-    popup.classList.toggle('popup__opened');
-    togglePopupEventListener(popup);
+    handleFormInput(profileForm,profileForm.querySelector('.popup__save'),object.inactiveButtonClass);
 }
 function saveProfile(evt){
     evt.preventDefault();
@@ -71,43 +105,7 @@ function createCard(cardTitle,source){
     setCardEventListeners(newCard);
     return newCard;
 }
-function setCardEventListeners(card){
-    card.querySelector('.place-card__like').addEventListener('click', handleLike);
-    card.querySelector('.place-card__delete').addEventListener('click', handleDelete);
-    card.querySelector('.place-card__image').addEventListener('click', handleImageClick);
-}
-function handleLike(evt){
-    evt.target.classList.toggle('place-card__like_clicked');
-}
-function handleDelete(evt){
-    const deleteCard = evt.target.closest('.place-card');
-    deleteCard.remove();
-}
-function handleImageClick(evt){
-    imagePopup.querySelector('.popup__image').src = evt.target.src;
-    imagePopup.querySelector('.popup__text').textContent = evt.target.alt;
-    togglePopup(imagePopup);
-}
-function togglePopupEventListener(popup){
-    if(popup.classList.contains('popup__opened')){
-        popup.addEventListener('click',clickOverlay);
-        document.addEventListener('keydown',clickEsc);
-    }else{
-        popup.removeEventListener('click',clickOverlay);
-        document.removeEventListener('keydown',clickEsc);
-    }
-}
-function clickOverlay(evt){
-    if(evt.target.classList.contains('popup')){
-        togglePopup(document.querySelector('.popup__opened'));
-    }
-}
-function clickEsc(evt){
-    if(evt.keyCode === 27){
-        togglePopup(document.querySelector('.popup__opened'));
-    }
-}
-editButton.addEventListener('click',function(evt){
+editButton.addEventListener('click',(evt) => {
     openProfilePopup();
 });
 profileCloseButton.addEventListener('click',function(){
@@ -118,14 +116,10 @@ popupCardCloseButton.addEventListener('click',function(){
     togglePopup(popupCard);
     popupCardInputLink.value = '';
     popupCardInputName.value = '';
-
 });
 addButton.addEventListener('click',function(){
     togglePopup(popupCard);
-    toggleButtonState(Array.from(placesForm.querySelectorAll('input')),saveButton);
-    Array.from(placesForm.querySelectorAll('input')).forEach((item) => {
-        hideInputError(placesForm,item);
-    })
+    handleFormInput(popupCardForm,popupCardForm.querySelector('.popup__save'),object.inactiveButtonClass);
 });
 popupCard.addEventListener('submit',function(evt){
     const cardElement = createCard(popupCardInputName.value,popupCardInputLink.value);

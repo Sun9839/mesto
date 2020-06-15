@@ -1,69 +1,43 @@
-const profileForm = document.forms.profile;
-const placesForm = document.forms.places;
-function showInputError(formElement,inputElement){
-    const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-    inputElement.classList.add('popup__name_type_error');
-    errorElement.classList.add('popup__input-error_active');
+const object = {
+    formSelector: '.popup__form',
+    inputSelector: 'input',
+    submitButtonSelector: '.popup__save',
+    inputErrorClass: 'popup__name_type_error',
+    inactiveButtonClass: 'popup__save_inactive'
 }
-function hideInputError(formElement, inputElement){
-    const errorElement = formElement.querySelector(`#${inputElement.id}-error`);
-    inputElement.classList.remove('popup__name_type_error');
-    errorElement.classList.remove('popup__input-error_active');
-    errorElement.textContent = '';
-}
-function isValid(formElement,inputElement){
-    if(!inputElement.validity.valid){
-        showInputError(formElement,inputElement,inputElement.validitionMessage);
-        showErrorMessage(inputElement);
-    }else{
-        hideInputError(formElement,inputElement);
-    }
-}
-function setEventListeners(formElement){
-    const inputList = Array.from(formElement.querySelectorAll('input'));
-    toggleButtonState(inputList, formElement.querySelector('.popup__save'));
-    inputList.forEach((inputElement) =>{
-        inputElement.addEventListener('input',() => {
-            isValid(formElement, inputElement);
-            toggleButtonState(inputList, formElement.querySelector('.popup__save'));
-        });
-    });
-}
-function enableValidation(){
-    const formList = Array.from(document.querySelectorAll('.popup__form'));
-    formList.forEach((formElement) =>{
-        setEventListeners(formElement);
-    });
-}
-function hasInvalidInput(inputList){
-    return inputList.some((inputElement) => {
-        return !inputElement.validity.valid;
+function cleanErrors(popup){
+    const inputElements = Array.from(popup.querySelectorAll('input'));
+    inputElements.forEach((inputElement) => {
+        inputElement.classList.remove(object.inputErrorClass);
+        popup.querySelector(`#${inputElement.id}-error`).textContent = '';
     })
 }
-function toggleButtonState(inputList,buttonElement){
-    if (hasInvalidInput(inputList)) {
-        buttonElement.classList.add('popup__save_inactive');
-        buttonElement.disabled = true;
-    } else {
-        buttonElement.classList.remove('popup__save_inactive');
-        buttonElement.disabled = false;
-    }
-}
-function showErrorMessage(input){
-    if(input.value.length > 0){
-        if(input.id === 'input-link'){
-            showLinkError(input);
-        }else{
-            showTextError(input);
-        }
+function handleInput(evt,errCls){
+    const input = evt.target;
+    const error = document.querySelector(`#${input.id}-error`);
+    const isInputValid = input.checkValidity();
+    if(isInputValid){
+        input.classList.remove(errCls);
+        error.textContent = '';
     }else{
-        document.querySelector(`#${input.id}-error`).textContent = 'Вы пропустили это поле.';
+        input.classList.add(errCls);
+        error.textContent = input.validationMessage;
     }
 }
-function showLinkError(input){
-    document.querySelector(`#${input.id}-error`).textContent = 'Введите адрес сайта.';
+function handleFormInput(formElement, submitButton, inactiveButtonClass){
+    const hasErrors = !formElement.checkValidity();
+    submitButton.disabled = hasErrors;
+    submitButton.classList.toggle(inactiveButtonClass,hasErrors)
 }
-function showTextError(input){
-    document.querySelector(`#${input.id}-error`).textContent = `Длинна текста должна быть от ${input.getAttribute('minlength')} до ${input.getAttribute('maxlength')} символов.`;
+function enableValidation(obj){
+    const formElements = Array.from(document.querySelectorAll(obj.formSelector));
+    formElements.forEach((formElement) => {
+        const InputElements = Array.from(formElement.querySelectorAll(obj.inputSelector));
+        const submitButton = formElement.querySelector(obj.submitButtonSelector);
+        InputElements.forEach((input) => {
+            input.addEventListener('input',(el) => {handleInput(el,obj.inputErrorClass)});
+        })
+        formElement.addEventListener('input', () => {handleFormInput(formElement, submitButton, obj.inactiveButtonClass)})
+    })
 }
-enableValidation();
+enableValidation(object);
