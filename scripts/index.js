@@ -69,12 +69,12 @@ function checkButtonState(popup){
 function togglePopup(popup){
     popup.classList.toggle('popup__opened');
     cleanErrors(popup);
-    checkButtonState(popup);
 }
 function openProfilePopup(){
     inputName.value = profileName.textContent;
     inputActivity.value = profileActivity.textContent;
     togglePopup(profilePopup);
+    checkButtonState(profilePopup);
 }
 function saveProfile(evt){
     evt.preventDefault();
@@ -98,6 +98,7 @@ function enableValidationPopupCard(){
 editButton.addEventListener('click',openProfilePopup);
 addButton.addEventListener('click',() =>{
     togglePopup(popupCard);
+    checkButtonState(popupCard);
 });
 profileCloseButton.addEventListener('click',() =>{
     togglePopup(profilePopup);
