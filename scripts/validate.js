@@ -25,7 +25,7 @@ function handleInput(evt,errCls){
     }
 }
 function handleFormInput(formElement, submitButton, inactiveButtonClass){
-    const hasErrors = !formElement.checkValidity();
+    const hasErrors =! formElement.checkValidity();
     submitButton.disabled = hasErrors;
     submitButton.classList.toggle(inactiveButtonClass,hasErrors)
 }
