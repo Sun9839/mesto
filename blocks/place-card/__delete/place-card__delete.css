@@ -13,6 +13,7 @@
     z-index: 3;
     outline: none;
     -webkit-appearance: none;
+    cursor: pointer;
 }
 .place-card__delete:hover{
     opacity: 0.6;

@@ -6,6 +6,7 @@
     border: 2px solid #FFFFFF;
     outline: none;
     -webkit-appearance: none;
+    cursor: pointer;
 }
 .profile__add:hover{
     opacity: 0.6;

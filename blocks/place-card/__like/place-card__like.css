@@ -13,6 +13,7 @@
     margin-top: 31px;
     outline: none;
     -webkit-appearance: none;
+    cursor: pointer;
 }
 .place-card__like:hover{
     opacity: 0.6;

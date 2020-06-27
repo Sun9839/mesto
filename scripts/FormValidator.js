@@ -1,36 +1,48 @@
 class FormValidator{
     constructor(optionObject,form){
-        this._inputSelector = optionObject.inputElement;
+        this._inputSelector = optionObject.inputSelector;
         this._submitButtonSelector = optionObject.submitButtonSelector;
         this._inputErrorClass = optionObject.inputErrorClass;
         this._inactiveButtonClass = optionObject.inactiveButtonClass;
         this._form = form;
     }
-    _handleInput(){
-        const inputElements = Array.from(this._form.querySelectorAll('input'));
-        inputElements.forEach((inputElement) => {
-            const error = document.querySelector(`#${inputElement.id}-error`);
-            const isInputValid = inputElement.checkValidity();
-            if(isInputValid){
-                inputElement.classList.remove(this._inputErrorClass);
-                error.textContent = '';
-            }else{
-                inputElement.classList.add(this._inputErrorClass);
-                error.textContent = inputElement.validationMessage;
-            }
-        })
+    hideInputError(input){
+        input.classList.remove(this._inputErrorClass);
+        document.querySelector(`#${input.id}-error`).textContent = '';
     }
-    _handleFormInput(){
-        const hasErrors = !this._form.checkValidity();
-        const submitButton = this._form.querySelector(this._submitButtonSelector);
-        submitButton.disabled = hasErrors;
-        submitButton.classList.toggle(this._inactiveButtonClass,hasErrors)
+    _showInputError(input){
+        input.classList.add(this._inputErrorClass);
+        document.querySelector(`#${input.id}-error`).textContent = input.validationMessage;
+    }
+    _checkInputsValidity(){
+        const inputs = Array.from(this._form.querySelectorAll(this._inputSelector)); 
+        inputs.forEach((item) => {
+            item.addEventListener('input',() => {
+                const hasNotErrors = item.checkValidity();
+                if(hasNotErrors){
+                    this.hideInputError(item);
+                }else{
+                    this._showInputError(item);
+                }
+            });
+        });
+    }
+    checkButtonState(questionary){
+        const saveButton = questionary.querySelector('.popup__save');
+        const hasNotErrors = questionary.checkValidity();
+        if(hasNotErrors){ 
+            saveButton.classList.remove(this._inactiveButtonClass); 
+            saveButton.disabled = false; 
+        }else{ 
+            saveButton.classList.add(this._inactiveButtonClass); 
+            saveButton.disabled = true; 
+        } 
     }
     enableValidation(){
         this._form.addEventListener('input',() => {
-            this._handleInput()
-            this._handleFormInput();
+            this.checkButtonState(this._form);
         })
+        this._checkInputsValidity();
     }
 }
 export {FormValidator};
