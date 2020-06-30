@@ -14,22 +14,19 @@ class FormValidator{
         input.classList.add(this._inputErrorClass);
         document.querySelector(`#${input.id}-error`).textContent = input.validationMessage;
     }
-    _checkInputsValidity(){
-        const inputs = Array.from(this._form.querySelectorAll(this._inputSelector)); 
-        inputs.forEach((item) => {
-            item.addEventListener('input',() => {
-                const hasNotErrors = item.checkValidity();
-                if(hasNotErrors){
-                    this.hideInputError(item);
-                }else{
-                    this._showInputError(item);
-                }
-            });
-        });
+    _checkInputValidity(input){
+        input.addEventListener('input',() => {
+            const hasNotErrors = input.checkValidity(); 
+            if(hasNotErrors){ 
+                this.hideInputError(input); 
+            }else{ 
+                this._showInputError(input); 
+            } 
+        })
     }
-    checkButtonState(questionary){
-        const saveButton = questionary.querySelector('.popup__save');
-        const hasNotErrors = questionary.checkValidity();
+    checkButtonState(){
+        const saveButton = this._form.querySelector('.popup__save');
+        const hasNotErrors = this._form.checkValidity();
         if(hasNotErrors){ 
             saveButton.classList.remove(this._inactiveButtonClass); 
             saveButton.disabled = false; 
@@ -38,11 +35,17 @@ class FormValidator{
             saveButton.disabled = true; 
         } 
     }
-    enableValidation(){
-        this._form.addEventListener('input',() => {
-            this.checkButtonState(this._form);
+    _setEventListeners(){
+        const inputs = Array.from(this._form.querySelectorAll(this._inputSelector));
+        inputs.forEach((item) => {
+            this._checkInputValidity(item);
         })
-        this._checkInputsValidity();
+        this._form.addEventListener('input',() => { 
+            this.checkButtonState(this._form); 
+        })
+    }
+    enableValidation(){
+    this._setEventListeners();
     }
 }
 export {FormValidator};

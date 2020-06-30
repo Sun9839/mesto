@@ -1,4 +1,5 @@
-const ImagePopup = document.querySelector('#image-popup');
+import {addEventListenerPopup} from './untils.js';
+const imagePopup = document.querySelector('#image-popup');
 class Card{
     constructor(data,templateSelector){
         this._title = data.name;
@@ -16,33 +17,13 @@ class Card{
         this._element.remove();
         this._element = '';
     }
-    _clickOverlay(evt){
-        if(evt.target.classList.contains('popup')){	   
-            ImagePopup.classList.remove('popup_opened');
-        }
-    }
-    _clickEsc(evt){
-        if(evt.keyCode === 27){
-            ImagePopup.classList.remove('popup_opened');
-        }
-    }
-    _addEventListenerPopup(){
-        const openPopup = ImagePopup.classList.contains('popup_opened');
-        if(openPopup){
-            ImagePopup.addEventListener('click',this._clickOverlay);
-            document.addEventListener('keydown',this._clickEsc);
-        }else{
-            ImagePopup.removeEventListener('click',this._clickOverlay);
-            document.removeEventListener('keydown',this._clickEsc);
-        }
-    }
     _openPopup(){
-        ImagePopup.classList.toggle('popup_opened');
-        this._addEventListenerPopup();
+        imagePopup.classList.toggle('popup_opened');
+        addEventListenerPopup(imagePopup);
     }
     _handleImageClick(){
-        ImagePopup.querySelector('.popup__image').src = this._element.querySelector('.place-card__image').src;
-        ImagePopup.querySelector('.popup__text').textContent = this._element.querySelector('.place-card__image').alt;
+        imagePopup.querySelector('.popup__image').src = this._element.querySelector('.place-card__image').src;
+        imagePopup.querySelector('.popup__text').textContent = this._element.querySelector('.place-card__image').alt;
         this._openPopup();
     }
     _setEventListeners(){

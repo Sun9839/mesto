@@ -1,5 +1,6 @@
 import {Card} from './Card.js';
 import {FormValidator} from './FormValidator.js';
+import {togglePopup} from './untils.js';
 const editButton = document.querySelector('.profile__edit');
 const addButton = document.querySelector('.profile__add');
 const profileName = document.querySelector('.profile__name');
@@ -50,30 +51,6 @@ const options = {
 }
 const profileFormValidator = new FormValidator(options,profileForm);
 const popupCardFormValidator = new FormValidator(options,popupCardForm);
-function clickOverlay(evt){
-    if(evt.target.classList.contains('popup')){	   
-        togglePopup(document.querySelector('.popup_opened'));
-    }
-}
-function clickEsc(evt){
-    if(evt.keyCode === 27){
-        togglePopup(document.querySelector('.popup_opened'));
-    }
-}
-function addEventListenerPopup(popup){
-    const openPopup = popup.classList.contains('popup_opened');
-    if(openPopup){
-        popup.addEventListener('click',clickOverlay);
-        document.addEventListener('keydown',clickEsc);
-    }else{
-        popup.removeEventListener('click',clickOverlay);
-        document.removeEventListener('keydown',clickEsc);
-    }
-}
-function togglePopup(popup){
-    popup.classList.toggle('popup_opened');
-    addEventListenerPopup(popup);
-}
 function openProfilePopup(){
     inputName.value = profileName.textContent;
     profileFormValidator.hideInputError(inputName);
@@ -92,12 +69,6 @@ function createCard(data){
     const card = new Card(data,'#place-card-template');
     const cardElement = card.generateCard();
     document.querySelector('.places__list').prepend(cardElement);
-}
-function enableValidationProfilePopup(){
-    profileFormValidator.enableValidation();
-}
-function enableValidationpopupCard(){
-    popupCardFormValidator.enableValidation();
 }
 editButton.addEventListener('click',openProfilePopup);
 addButton.addEventListener('click',() =>{
@@ -134,5 +105,5 @@ initialCards.forEach((item) => {
     const cardElement = card.generateCard();
     document.querySelector('.places__list').append(cardElement);
 });
-enableValidationProfilePopup();
-enableValidationpopupCard();
+profileFormValidator.enableValidation();
+popupCardFormValidator.enableValidation();
