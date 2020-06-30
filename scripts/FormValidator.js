@@ -15,14 +15,12 @@ class FormValidator{
         document.querySelector(`#${input.id}-error`).textContent = input.validationMessage;
     }
     _checkInputValidity(input){
-        input.addEventListener('input',() => {
-            const hasNotErrors = input.checkValidity(); 
-            if(hasNotErrors){ 
-                this.hideInputError(input); 
-            }else{ 
-                this._showInputError(input); 
-            } 
-        })
+        const hasNotErrors = input.checkValidity(); 
+        if(hasNotErrors){ 
+            this.hideInputError(input); 
+        }else{ 
+            this._showInputError(input); 
+        } 
     }
     checkButtonState(){
         const saveButton = this._form.querySelector('.popup__save');
@@ -38,7 +36,9 @@ class FormValidator{
     _setEventListeners(){
         const inputs = Array.from(this._form.querySelectorAll(this._inputSelector));
         inputs.forEach((item) => {
-            this._checkInputValidity(item);
+            item.addEventListener('input',() => {
+               this._checkInputValidity(item); 
+            });
         })
         this._form.addEventListener('input',() => { 
             this.checkButtonState(this._form); 

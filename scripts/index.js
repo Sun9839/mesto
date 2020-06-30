@@ -1,6 +1,6 @@
 import {Card} from './Card.js';
 import {FormValidator} from './FormValidator.js';
-import {togglePopup} from './untils.js';
+import {togglePopup} from './utils.js';
 const editButton = document.querySelector('.profile__edit');
 const addButton = document.querySelector('.profile__add');
 const profileName = document.querySelector('.profile__name');

@@ -1,4 +1,4 @@
-import {addEventListenerPopup} from './untils.js';
+import {addEventListenerPopup} from './utils.js';
 const imagePopup = document.querySelector('#image-popup');
 class Card{
     constructor(data,templateSelector){
