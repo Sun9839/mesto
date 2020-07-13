@@ -21,14 +21,13 @@ export default class Popup {
         }
     }
     setEventListeners(){
-        const closeButton = this._popup.querySelector('.popup__save');
-        closeButton.addEventListener('click',() => {
-            this.close();
-        });
         const popupIsOpen = this._popup.classList.contains('popup_opened');
         if(popupIsOpen){
             document.addEventListener('keydown',this._handleEscClick);
             this._popup.addEventListener('click',this._handleOverlayClick);
+            this._popup.querySelector('.popup__close').addEventListener('click',() => {
+                this.close();
+            })
         }else{
             document.removeEventListener('keydown',this._handleEscClick);
             this._popup.removeEventListener('click',this._handleOverlayClick);
