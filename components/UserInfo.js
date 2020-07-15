@@ -8,6 +8,7 @@ export default class UserInfo {
             name: this._userName.textContent,
             activity: this._userActivity.textContent
         }
+        return user;
     }
     setUserInfo(inputs){
         this._userName.textContent = inputs.name;

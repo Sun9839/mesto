@@ -1,3 +1,5 @@
+export const profileEditButton = document.querySelector('.profile__edit');
+export const addCardButton = document.querySelector('.profile__add');
 export const initialCards = [
     {
         name: 'Татуин',
@@ -24,3 +26,8 @@ export const initialCards = [
         link: 'https://vignette.wikia.nocookie.net/starwarsrussia/images/1/15/TipocaCity.jpg/revision/latest?cb=20180320001559&path-prefix=ru'
     }
 ];
+export const optionObject = {
+    inputSelector: 'input',
+    inputErrorClass: '.popup__input-error',
+    inactiveButtonClass: 'popup__save_inactive'
+}
