@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mesto</title>
-    <link rel='stylesheet' href='./pages/index.css'>
     <meta name='description' content='Интерактивная страница, в которую можно добавлять фотографии, удалять их и ставить лайки.'>
     <meta name='keywords' content='Фотографии'>
     <meta name='author' content='Александр Давыденко'>
@@ -59,7 +58,7 @@
       <section class='popup' id='image-popup'>
         <div class='popup__container'>
           <button class='popup__close' type='button'></button>
-          <img class='popup__image' alt='фото' src=''>
+          <img class='popup__image' alt='фото' src='#'>
           <p class='popup__text'></p>
         </div>
       </section>
@@ -70,12 +69,11 @@
     </div>
     <template id='place-card-template'>
       <div class='place-card'>
-        <img class='place-card__image' alt='фото' src=''>
+        <img class='place-card__image' alt='фото' src='#'>
         <button class='place-card__delete' type='button'></button>
         <p class='place-card__title'></p>
         <button class='place-card__like' type='button'></button>
       </div>
     </template>
-    <script src='./pages/index.js' type="module"></script>
   </body>
 </html>

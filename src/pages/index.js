@@ -5,6 +5,25 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import {initialCards,profileEditButton,addCardButton,optionObject} from "../utils/constants.js";
 import FormValidator from "../components/FormValidator.js";
+import closeIcon from "../images/Close Icon.svg"
+import jakIvKusto from "../images/Jak-Iv-Kusto.jpg"
+import like from "../images/like.svg"
+import likeClicked from "../images/likeClicked.svg"
+import logo from "../images/logo.png"
+import pencil from"../images/pencil.svg"
+import plus from "../images/plus.svg"
+import rubishContainer from "../images/rubish-container.svg"
+import "./index.css"
+const whoIsTheGoat = [
+    { name: 'closeIcon', image: closeIcon },
+    { name: 'jakIvKusto', link: jakIvKusto },
+    { name: 'likeClicked', link: likeClicked },
+    { name: 'logo', link: logo },
+    { name: 'like', link: like },
+    { name: 'pencil', link: pencil },
+    { name: 'plus', link: plus },
+    { name: 'rubishContainer', link: rubishContainer }
+];
 
 const imagePopup = new PopupWithImage('#image-popup');
 
