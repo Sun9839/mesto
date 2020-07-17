@@ -3,7 +3,7 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import Card from "../components/Card.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
-import {initialCards,profileEditButton,addCardButton,optionObject} from "../utils/constants.js";
+import {initialCards,profileEditButton,addCardButton,optionObject,userPopupInputs,placePopupInputs} from "../utils/constants.js";
 import FormValidator from "../components/FormValidator.js";
 import closeIcon from "../images/Close Icon.svg"
 import jakIvKusto from "../images/Jak-Iv-Kusto.jpg"
@@ -14,16 +14,6 @@ import pencil from"../images/pencil.svg"
 import plus from "../images/plus.svg"
 import rubishContainer from "../images/rubish-container.svg"
 import "./index.css"
-const whoIsTheGoat = [
-    { name: 'closeIcon', image: closeIcon },
-    { name: 'jakIvKusto', link: jakIvKusto },
-    { name: 'likeClicked', link: likeClicked },
-    { name: 'logo', link: logo },
-    { name: 'like', link: like },
-    { name: 'pencil', link: pencil },
-    { name: 'plus', link: plus },
-    { name: 'rubishContainer', link: rubishContainer }
-];
 
 const imagePopup = new PopupWithImage('#image-popup');
 
@@ -34,7 +24,6 @@ const placePopup = new PopupWithForm({
             data: obj,
             handleCardClick: () => {
                 imagePopup.open(obj);
-                imagePopup.setEventListeners();
             },
             templateSelector: '#place-card-template'
         });
@@ -65,7 +54,6 @@ const places = new Section({
             data: item,
             handleCardClick: () => {
                 imagePopup.open(item);
-                imagePopup.setEventListeners();
             },
             templateSelector: '#place-card-template'
         });
@@ -80,10 +68,14 @@ profileEditButton.addEventListener('click',() => {
     profilePopup.setInputsValues(userInfo.getUserInfo());
     profilePopupValidation.checkButtonState();
     profilePopup.open();
-    profilePopup.setEventListeners();
+    userPopupInputs.forEach((input) => {
+        profilePopupValidation.hideInputError(input);
+    })
 });
 addCardButton.addEventListener('click',() => {
     placePopup.open();
     placePopupValidation.checkButtonState();
-    placePopup.setEventListeners();
+    placePopupInputs.forEach((input) => {
+        profilePopupValidation.hideInputError(input);
+    })
 })

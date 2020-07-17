@@ -1,3 +1,5 @@
+import {ESCAPE_KEY_CODE} from "../utils/constants.js";
+
 export default class Popup {
     constructor(popupSelector) {
         this._popup = document.querySelector(popupSelector);
@@ -6,9 +8,12 @@ export default class Popup {
     }
     open(){
         this._popup.classList.add('popup_opened');
+        document.addEventListener('keydown',this._handleEscClick);
+        this._setEventListeners()
     }
     close(){
         this._popup.classList.remove('popup_opened');
+        document.removeEventListener('keydown',this._handleEscClick);
     }
     _handleOverlayClick(evt){
         if(evt.target.classList.contains('popup')){
@@ -16,21 +21,15 @@ export default class Popup {
         }
     }
     _handleEscClick(evt){
-        if(evt.keyCode === 27){
+        if(evt.keyCode === ESCAPE_KEY_CODE){
             this.close();
         }
     }
-    setEventListeners(){
-        const popupIsOpen = this._popup.classList.contains('popup_opened');
-        if(popupIsOpen){
-            document.addEventListener('keydown',this._handleEscClick);
-            this._popup.addEventListener('click',this._handleOverlayClick);
-            this._popup.querySelector('.popup__close').addEventListener('click',() => {
-                this.close();
-            })
-        }else{
-            document.removeEventListener('keydown',this._handleEscClick);
-            this._popup.removeEventListener('click',this._handleOverlayClick);
-        }
+    _setEventListeners() {
+        this._popup.addEventListener('click', this._handleOverlayClick);
+        this._popup.querySelector('.popup__close').addEventListener('click', () => {
+            this.close();
+        });
     }
+
 }
