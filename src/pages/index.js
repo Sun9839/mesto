@@ -31,6 +31,7 @@ const placePopup = new PopupWithForm({
         places.addItem(card.generateCard());
     }
 });
+placePopup.setEventListeners();
 const placePopupValidation = new FormValidator(optionObject,'#card-popup');
 placePopupValidation.enableValidation();
 
@@ -45,6 +46,7 @@ const profilePopup = new PopupWithForm({
         userInfo.setUserInfo(obj);
     }
 });
+profilePopup.setEventListeners();
 const profilePopupValidation = new FormValidator(optionObject,'#profile-popup');
 profilePopupValidation.enableValidation();
 

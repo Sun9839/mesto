@@ -27,5 +27,8 @@ export default class PopupWidthForm extends Popup{
     }
     close() {
         super.close();
+        this._popup.querySelectorAll('input').forEach((input) => {
+            input.value = '';
+        })
     }
 }
