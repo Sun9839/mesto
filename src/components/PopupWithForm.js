@@ -16,8 +16,8 @@ export default class PopupWidthForm extends Popup{
         this._popup.querySelector('.popup__name').value = object.name;
         this._popup.querySelector('.popup__activity').value = object.activity;
     }
-    _setEventListeners() {
-        super._setEventListeners();
+    setEventListeners() {
+        super.setEventListeners();
         this._popup.addEventListener('submit',(evt) => {
             evt.preventDefault();
             this._getInputValues();

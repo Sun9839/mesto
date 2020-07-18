@@ -16,6 +16,7 @@ import rubishContainer from "../images/rubish-container.svg"
 import "./index.css"
 
 const imagePopup = new PopupWithImage('#image-popup');
+imagePopup.setEventListeners();
 
 const placePopup = new PopupWithForm({
     popupSelector: '#card-popup',
