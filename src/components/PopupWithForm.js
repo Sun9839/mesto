@@ -10,6 +10,7 @@ export default class PopupWidthForm extends Popup{
         this._inputList.forEach((input) => {
             this._formValues[input.name] = input.value;
         });
+        this._formValues.avatar = document.querySelector('.profile__image').src;
         return this._formValues;
     }
     setInputsValues(object){
