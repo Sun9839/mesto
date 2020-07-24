@@ -14,6 +14,5 @@ export default class UserInfo {
     setUserInfo(inputs){
         this._userName.textContent = inputs.name;
         this._userActivity.textContent = inputs.about;
-        this._avatar.src = inputs.avatar
     }
 }

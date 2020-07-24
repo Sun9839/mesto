@@ -10,7 +10,6 @@ export default class PopupWidthForm extends Popup{
         this._inputList.forEach((input) => {
             this._formValues[input.name] = input.value;
         });
-        this._formValues.avatar = document.querySelector('.profile__image').src;
         return this._formValues;
     }
     setInputsValues(object){
@@ -22,8 +21,16 @@ export default class PopupWidthForm extends Popup{
         this._popup.addEventListener('submit',(evt) => {
             evt.preventDefault();
             this._getInputValues();
-            this._handleSubmit(this._formValues);
-            this.close();
+            if(this._popup.querySelector('.popup__save').textContent === 'Сохранить'){
+                this._popup.querySelector('.popup__save').textContent = 'Сохранение...';
+            }
+            setTimeout(() => {
+                if(this._popup.querySelector('.popup__save').textContent === 'Сохранение...'){
+                    this._popup.querySelector('.popup__save').textContent = 'Сохранить';
+                }
+                this._handleSubmit(this._formValues);
+                this.close();
+            },1000);
         });
     }
     close() {

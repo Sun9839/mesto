@@ -1,7 +1,9 @@
 @import url('./__image/place-card__image.css');
 @import url('./__delete/place-card__delete.css');
 @import url('./__title/place-card__title.css');
+@import url('./__like-container/place-card__like-container.css');
 @import url('./__like/place-card__like.css');
+@import url('./__quantity/place-card__quantity.css');
 .place-card{
     display: flex;
     flex-direction: row;

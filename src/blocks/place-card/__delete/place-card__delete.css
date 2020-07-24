@@ -1,3 +1,4 @@
+@import url('./_disabled/place-card__delete_disabled.css');
 .place-card__delete{
     background-image: url('../../../images/rubish-container.svg');
     background-position: center;
