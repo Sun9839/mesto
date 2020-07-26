@@ -1,8 +1,8 @@
-.places__list{
+.places-list{
     display: grid;
 }
 @media screen and (min-width: 320px){
-    .places__list{
+    .places-list{
         grid-template-columns: 282px;
         grid-template-rows: repeat(6,361px);
         grid-gap: 20px;
@@ -11,7 +11,7 @@
     }
 }
 @media screen and (min-width: 650px){
-    .places__list{
+    .places-list{
         grid-template-columns: repeat(2,282px);
         grid-template-rows: repeat(3,361px);
         grid-column-gap: 18px;
@@ -20,7 +20,7 @@
     }
 }
 @media screen and (min-width: 980px){
-    .places__list{
+    .places-list{
         grid-template-columns: repeat(3,282px);
         grid-template-rows: repeat(2,361px);
         margin-left: calc((100% - 882px) / 2);

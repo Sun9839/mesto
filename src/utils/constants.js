@@ -9,5 +9,5 @@ export const ESCAPE_KEY_CODE = 27;
 export const userPopupInputs = document.querySelector('#profile-popup').querySelectorAll('input');
 export const placePopupInputs = document.querySelector('#card-popup').querySelectorAll('input');
 export const profileImage =document.querySelector('.profile__image');
-export const placesList = document.querySelector('.places__list');
+export const placesList = document.querySelector('.places-list');
 export const avatarButton = document.querySelector('.profile__image-button');

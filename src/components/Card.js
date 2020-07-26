@@ -54,8 +54,9 @@ export default class Card {
         this._getTemplate();
         this._setEventListeners();
         this._card.querySelector('.place-card__title').textContent = this._title;
-        this._card.querySelector('.place-card__image').alt = this._title;
-        this._card.querySelector('.place-card__image').src = this._link;
+        this._image = this._card.querySelector('.place-card__image');
+        this._image.alt = this._title;
+        this._image.src = this._link;
         this._card.querySelector('.place-card__quantity').textContent = this._quantity;
         if(this._owner._id != '9aa1628c56d20492a03bb1f2'){
             this._disableDeleteButton();
