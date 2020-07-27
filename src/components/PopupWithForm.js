@@ -16,7 +16,8 @@ export default class PopupWidthForm extends Popup{
         this._popup.querySelector('.popup__name').value = object.name;
         this._popup.querySelector('.popup__activity').value = object.activity;
     }
-    setEventListeners() {
+
+    setEventListeners(){
         super.setEventListeners();
         this._popup.addEventListener('submit',(evt) => {
             evt.preventDefault();
@@ -24,19 +25,16 @@ export default class PopupWidthForm extends Popup{
             if(this._popup.querySelector('.popup__save').textContent === 'Сохранить'){
                 this._popup.querySelector('.popup__save').textContent = 'Сохранение...';
             }
-            setTimeout(() => {
-                if(this._popup.querySelector('.popup__save').textContent === 'Сохранение...'){
-                    this._popup.querySelector('.popup__save').textContent = 'Сохранить';
-                }
-                this._handleSubmit(this._formValues);
-                this.close();
-            },1000);
-        });
+            this._handleSubmit(this._formValues)
+        })
     }
     close() {
         super.close();
         this._popup.querySelectorAll('input').forEach((input) => {
             input.value = '';
         })
+        if(this._popup.querySelector('.popup__save').textContent === 'Сохранение...'){
+            this._popup.querySelector('.popup__save').textContent = 'Сохранить';
+        }
     }
 }

@@ -51,6 +51,8 @@ const placePopup = new PopupWithForm({
                         handleSubmit: () => {
                             api.deleteCard(card.returnId()).then(() => {
                                 card.delete()
+                            }).then(() => {
+                                placePopup.close();
                             });
                         }
                     })
@@ -73,6 +75,8 @@ const placePopup = new PopupWithForm({
             });
             const cardElement = card.generateCard();
             placesList.prepend(cardElement);
+        }).then(() => {
+            placePopup.close();
         })
     }
 });
@@ -109,6 +113,8 @@ api.getInitialCards().then(
                             handleSubmit: () => {
                                 api.deleteCard(card.returnId()).then(() => {
                                     card.delete()
+                                }).then(() => {
+                                    deletePopup.close();
                                 });
                             }
                         })
@@ -142,6 +148,8 @@ const profilePopup = new PopupWithForm({
     handleSubmit: (obj) => {
         api.editProfile(obj).then((data) => {
             userInfo.setUserInfo(data);
+        }).then(() => {
+            profilePopup.close();
         })
     }
 });
@@ -158,6 +166,8 @@ const avatarPopup = new PopupWithForm({
     handleSubmit: (obj) => {
         api.setAvatar(obj).then(() => {
             profileImage.src = obj.avatar
+        }).then(() => {
+            avatarPopup.close();
         })
     }
 })
