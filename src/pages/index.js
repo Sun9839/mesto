@@ -35,45 +35,49 @@ const api = new Api({
     userUrl: 'https://mesto.nomoreparties.co/v1/cohort-13/users/me'
 });
 
+const newCard = (data) => {
+    const card = new Card({
+        data: data,
+        handleCardClick: () => {
+            imagePopup.open(data);
+        },
+        templateSelector: '#place-card-template',
+        clickDelete: () => {
+            const deletePopup = new PopupWithForm({
+                popupSelector: '#delete-popup',
+                handleSubmit: () => {
+                    api.deleteCard(card.returnId()).then(() => {
+                        card.delete()
+                    }).then(() => {
+                        deletePopup.close();
+                    });
+                }
+            })
+            deletePopup.setEventListeners();
+            deletePopup.open();
+        },
+        likeClick: () => {
+            if(card.checkLike()){
+                api.removeLike(card.returnId()).then(() => {
+                    card.removeLike();
+                    card.handleLike();
+                });
+            }else{
+                api.setLike(card.returnId()).then(() => {
+                    card.addLike();
+                    card.handleLike();
+                });
+            }
+        }
+    })
+    return card;
+}
 const placePopup = new PopupWithForm({
     popupSelector: '#card-popup',
     handleSubmit: (obj) => {
         api.addCardToServer(obj).then((data) => {
-            const card = new Card({
-                data: data,
-                handleCardClick: () => {
-                    imagePopup.open(data);
-                },
-                templateSelector: '#place-card-template',
-                clickDelete: () => {
-                    const deletePopup = new PopupWithForm({
-                        popupSelector: '#delete-popup',
-                        handleSubmit: () => {
-                            api.deleteCard(card.returnId()).then(() => {
-                                card.delete()
-                            }).then(() => {
-                                placePopup.close();
-                            });
-                        }
-                    })
-                    deletePopup.setEventListeners();
-                    deletePopup.open();
-                },
-                likeClick: () => {
-                    if(card.checkLike()){
-                        api.removeLike(card.returnId()).then(() => {
-                            card.removeLike();
-                            card.handleLike();
-                        });
-                    }else{
-                        api.setLike(card.returnId()).then(() => {
-                            card.addLike();
-                            card.handleLike();
-                        });
-                    }
-                }
-            });
-            const cardElement = card.generateCard();
+            newCard(data);
+            const cardElement = newCard(data).generateCard();
             placesList.prepend(cardElement);
         }).then(() => {
             placePopup.close();
@@ -101,41 +105,8 @@ api.getInitialCards().then(
         const section = new Section({
             items: data,
             renderer: (item) => {
-                const card = new Card({
-                    data: item,
-                    handleCardClick: () => {
-                        imagePopup.open(item);
-                    },
-                    templateSelector: '#place-card-template',
-                    clickDelete: () => {
-                        const deletePopup = new PopupWithForm({
-                            popupSelector: '#delete-popup',
-                            handleSubmit: () => {
-                                api.deleteCard(card.returnId()).then(() => {
-                                    card.delete()
-                                }).then(() => {
-                                    deletePopup.close();
-                                });
-                            }
-                        })
-                        deletePopup.setEventListeners();
-                        deletePopup.open();
-                    },
-                    likeClick: () => {
-                        if(card.checkLike()){
-                            api.removeLike(card.returnId()).then(() => {
-                                card.removeLike()
-                                card.handleLike();
-                            });
-                        }else{
-                            api.setLike(card.returnId()).then(() => {
-                                card.addLike()
-                                card.handleLike();
-                            });
-                        }
-                    }
-                });
-                const cardElement = card.generateCard();
+                newCard(item);
+                const cardElement = newCard(item).generateCard();
                 section.addItem(cardElement);
             }
         },'.places-list');

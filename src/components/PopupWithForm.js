@@ -22,8 +22,9 @@ export default class PopupWidthForm extends Popup{
         this._popup.addEventListener('submit',(evt) => {
             evt.preventDefault();
             this._getInputValues();
-            if(this._popup.querySelector('.popup__save').textContent === 'Сохранить'){
-                this._popup.querySelector('.popup__save').textContent = 'Сохранение...';
+            this._saveButton = this._popup.querySelector('.popup__save');
+            if(this._saveButton.textContent === 'Сохранить'){
+                this._saveButton.textContent = 'Сохранение...';
             }
             this._handleSubmit(this._formValues)
         })
@@ -33,8 +34,8 @@ export default class PopupWidthForm extends Popup{
         this._popup.querySelectorAll('input').forEach((input) => {
             input.value = '';
         })
-        if(this._popup.querySelector('.popup__save').textContent === 'Сохранение...'){
-            this._popup.querySelector('.popup__save').textContent = 'Сохранить';
+        if(this._saveButton.textContent === 'Сохранение...'){
+            this._saveButton.textContent = 'Сохранить';
         }
     }
 }
